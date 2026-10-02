@@ -1,45 +1,50 @@
 # statusline-anywhere
 
-Your Claude Code status line, in the Claude Desktop app too.
+Your Claude Code status line, in the desktop app too.
 
 ![The Catppuccin Frappé status line drawn above the prompt in Claude Desktop](docs/desktop-status-line.png)
 
 <sub>[Catppuccin Frappé](https://statuslin.es/c/catppuccin-frapp-88ba1499) from statuslin.es, running
 in Claude Desktop with statusline-anywhere.</sub>
 
-Claude Code draws your custom status line in the terminal. The Desktop app doesn't, so when you
-work there you lose your model, context meter, cost and branch at a glance. Anthropic's issue for
-it, [#41456](https://github.com/anthropics/claude-code/issues/41456), has been open since March
-2026.
-
-statusline-anywhere runs the `statusLine` command you already have and draws its output, in color,
-just above the prompt box.
-
-- **Your status line, as it is.** It reads `statusLine.command` from your settings, so it works with
-  the script you already use, including ones from [statuslin.es](https://statuslin.es). There is
-  nothing to rewrite.
-- **Your terminal stays the same.** Claude Code already draws the status line there, so the plugin
-  doesn't run your command or draw anything in a terminal.
-- **Up to date.** It reruns your command when a session starts and after each reply. It also reruns
-  it every `refreshInterval` seconds if you set one, or every 60 seconds if you don't, so clocks and
-  timers keep moving.
+Claude Desktop doesn't draw custom status lines
+([#41456](https://github.com/anthropics/claude-code/issues/41456)). This plugin does. It runs the
+`statusLine` command you already have and shows the output above the prompt, in color.
 
 ## Install
 
-You need Claude Code 2.1.286 or later and a status line already set up. If you don't have one yet,
-pick one from [statuslin.es](https://statuslin.es) or see
-[Customize your status line](https://code.claude.com/docs/en/statusline).
+1. Paste this into a terminal:
 
-Then, in Claude Code, either in Desktop's Code tab or a terminal:
+   ```bash
+   claude plugin marketplace add NathanAB/statusline-anywhere && claude plugin install statusline-anywhere@statusline-anywhere
+   ```
+
+2. Open a new Code session in Claude Desktop. Your status line is above the prompt.
+
+That's it. You need Claude Code 2.1.286 or later and a status line. No status line yet? Pick one
+from [statuslin.es](https://statuslin.es).
+
+<details>
+<summary>Install from inside Claude Code instead</summary>
 
 ```
 /plugin marketplace add NathanAB/statusline-anywhere
 /plugin install statusline-anywhere@statusline-anywhere
+/reload-plugins
 ```
 
-Start a new session, or run `/reload-plugins`. Your status line appears above the prompt.
+</details>
 
-To remove it, run `/plugin`, open the Installed tab, and uninstall statusline-anywhere.
+To remove it: `claude plugin uninstall statusline-anywhere@statusline-anywhere`
+
+## How it works
+
+- It runs your `statusLine` command with the same kind of JSON Claude Code sends, so the script you
+  already use works as it is.
+- It only draws outside the terminal. In a terminal, Claude Code already shows your status line, so
+  the plugin stays out of the way.
+- It refreshes when a session starts, after each reply, and every 60 seconds, or every
+  `refreshInterval` seconds if you set one.
 
 ## What your script receives
 

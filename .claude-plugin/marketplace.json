@@ -3,12 +3,12 @@
   "owner": {
     "name": "statuslin.es"
   },
-  "description": "Your Claude Code status line, in the Claude Desktop app too.",
+  "description": "Your Claude Code status line, in the desktop app too.",
   "plugins": [
     {
       "name": "statusline-anywhere",
       "source": "./",
-      "description": "Your Claude Code status line, in the Claude Desktop app too."
+      "description": "Your Claude Code status line, in the desktop app too."
     }
   ]
 }
