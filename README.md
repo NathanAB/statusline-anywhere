@@ -2,6 +2,11 @@
 
 Your Claude Code status line, in the Claude Desktop app too.
 
+![The Catppuccin Frappé status line drawn above the prompt in Claude Desktop](docs/screenshot.png)
+
+<sub>[Catppuccin Frappé](https://statuslin.es/c/catppuccin-frapp-88ba1499) from statuslin.es, running
+in Claude Desktop with statusline-anywhere.</sub>
+
 Claude Code draws your custom status line in the terminal. The Desktop app doesn't, so when you
 work there you lose your model, context meter, cost and branch at a glance. Anthropic's issue for
 it, [#41456](https://github.com/anthropics/claude-code/issues/41456), has been open since March
