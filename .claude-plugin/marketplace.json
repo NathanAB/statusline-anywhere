@@ -1,0 +1,12 @@
+{
+  "name": "statusline-anywhere",
+  "owner": { "name": "statuslin.es" },
+  "description": "Shows your Claude Code status line in the Claude Desktop app, where Claude Code doesn't draw it.",
+  "plugins": [
+    {
+      "name": "statusline-anywhere",
+      "source": "./",
+      "description": "Shows your Claude Code status line in the Claude Desktop app, where Claude Code doesn't draw it."
+    }
+  ]
+}
