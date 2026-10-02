@@ -1,8 +1,11 @@
 {
   "name": "statusline-anywhere",
   "version": "0.1.0",
-  "description": "Shows your Claude Code status line in the Claude Desktop app, where Claude Code doesn't draw it. Runs the statusLine command you already have and draws its output above the prompt.",
-  "author": { "name": "statuslin.es", "url": "https://statuslin.es" },
+  "description": "Shows your Claude Code status line in the Claude Desktop app. Runs the statusLine command you already have and draws its output above the prompt. Changes nothing in the terminal.",
+  "author": {
+    "name": "statuslin.es",
+    "url": "https://statuslin.es"
+  },
   "homepage": "https://statuslin.es",
   "license": "MIT"
 }

@@ -1,37 +1,45 @@
 # statusline-anywhere
 
-Claude Code draws your custom status line in the terminal, but not in the Claude Desktop app.
-statusline-anywhere fixes that. It runs the `statusLine` command you already have and draws its
-output, in colour, in the band above the prompt.
+Your Claude Code status line, in the Claude Desktop app too.
 
-- **Your status line, unchanged.** It reads `statusLine.command` from your settings, so any status
-  line works, including ones from [statuslin.es](https://statuslin.es).
-- **Desktop only.** In a terminal, Claude Code already draws your status line, so this plugin
-  neither runs the command nor draws anything there.
-- **Kept current.** It reruns the command when the session starts, after each reply, and on a
-  timer: your `refreshInterval` if you set one, otherwise every 60 seconds.
+Claude Code draws your custom status line in the terminal. The Desktop app doesn't, so when you
+work there you lose your model, context meter, cost and branch at a glance. Anthropic's issue for
+it, [#41456](https://github.com/anthropics/claude-code/issues/41456), has been open since March
+2026.
 
-Made by [statuslin.es](https://statuslin.es), the gallery of Claude Code status lines.
+statusline-anywhere runs the `statusLine` command you already have and draws its output, in color,
+just above the prompt box.
+
+- **Your status line, as it is.** It reads `statusLine.command` from your settings, so it works with
+  the script you already use, including ones from [statuslin.es](https://statuslin.es). There is
+  nothing to rewrite.
+- **Your terminal stays the same.** Claude Code already draws the status line there, so the plugin
+  doesn't run your command or draw anything in a terminal.
+- **Up to date.** It reruns your command when a session starts and after each reply. It also reruns
+  it every `refreshInterval` seconds if you set one, or every 60 seconds if you don't, so clocks and
+  timers keep moving.
 
 ## Install
 
-In Claude Code (Desktop's Code tab or the terminal):
+You need Claude Code 2.1.286 or later and a status line already set up. If you don't have one yet,
+pick one from [statuslin.es](https://statuslin.es) or see
+[Customize your status line](https://code.claude.com/docs/en/statusline).
+
+Then, in Claude Code, either in Desktop's Code tab or a terminal:
 
 ```
 /plugin marketplace add NathanAB/statusline-anywhere
 /plugin install statusline-anywhere@statusline-anywhere
 ```
 
-Then start a new session, or run `/reload-plugins`.
+Start a new session, or run `/reload-plugins`. Your status line appears above the prompt.
 
-You need a status line configured first. See
-[Customize your status line](https://code.claude.com/docs/en/statusline), or pick one from
-[statuslin.es](https://statuslin.es).
+To remove it, run `/plugin`, open the Installed tab, and uninstall statusline-anywhere.
 
 ## What your script receives
 
-Claude Code sends status line scripts a JSON object on stdin. A plugin can't see everything Claude
-Code can, so statusline-anywhere sends these fields:
+Claude Code sends status line scripts a JSON object on stdin. statusline-anywhere builds the same
+object from what a plugin can see:
 
 - `session_id`
 - `transcript_path`
@@ -45,18 +53,26 @@ Code can, so statusline-anywhere sends these fields:
 - `exceeds_200k_tokens`
 - `rate_limits` (`five_hour`, `seven_day`, `spend_limit`)
 
-Fields it has no source for are left out, the same way Claude Code leaves out a field it has no
-value for: lines changed, PR, vim mode, prompt cache, effort and output style. A script that reads
-them should handle their absence, as it already must.
+A plugin can't see everything Claude Code can. These fields are missing: lines changed, PR, vim
+mode, prompt cache, effort and output style. If your status line shows one of them, that part stays
+blank in Desktop. Claude Code also leaves out fields it has no value for, so scripts that follow its
+docs already handle a missing field.
+
+## What it does on your machine
+
+It runs your status line command as you, which is what Claude Code does with it in a terminal.
+Beyond that, it only reads your settings and session info, and draws. The plugin itself makes no
+network requests and writes no files.
+
+`claude plugin validate` lists its full footprint: `$.settings.read`, `$.session.*` reads,
+`$.env.get` for `HOME` and `CLAUDE_CONFIG_DIR`, `$.process.run`, `$.clock`, and drawing.
 
 ## Limits
 
-- **macOS and Linux only for now.** The command runs through `sh`.
-- **No clickable links.** OSC 8 links show as plain text.
-- **It runs your command, as you.** That is exactly what Claude Code does with your `statusLine`,
-  and the plugin runs nothing else. Its full footprint, as `claude plugin validate` reports it:
-  `$.settings.read`, `$.session.*` reads, `$.env.get` (`HOME`, `CLAUDE_CONFIG_DIR`),
-  `$.process.run`, `$.clock` and drawing.
+- **Not on Windows yet.** It runs your command through `sh`.
+- **Links aren't clickable.** Links in your status line show as plain text.
+- **Another plugin can take the spot.** If a second plugin also draws above the prompt, only one of
+  them shows.
 
 ## Develop
 
@@ -68,11 +84,11 @@ claude plugin validate .
 claude plugin test
 ```
 
-To try a change in a session: `claude --plugin-dir .`.
+To try a change in a session, run `claude --plugin-dir .`.
 
-To type-check, load the plugin once with `--plugin-dir`. Claude Code then writes its types to
+To type-check, load the plugin once with `--plugin-dir` so Claude Code writes its types to
 `.claude-plugin/types/`. Then run `npx tsc -p .claude-plugin/types/tsconfig.json`.
 
 ## License
 
-MIT
+MIT. Made by [statuslin.es](https://statuslin.es), the gallery of Claude Code status lines.
