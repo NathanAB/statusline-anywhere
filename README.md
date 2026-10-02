@@ -2,7 +2,7 @@
 
 Your Claude Code status line, in the Claude Desktop app too.
 
-![The Catppuccin Frappé status line drawn above the prompt in Claude Desktop](docs/screenshot.png)
+![The Catppuccin Frappé status line drawn above the prompt in Claude Desktop](docs/statusline-in-desktop.png)
 
 <sub>[Catppuccin Frappé](https://statuslin.es/c/catppuccin-frapp-88ba1499) from statuslin.es, running
 in Claude Desktop with statusline-anywhere.</sub>
