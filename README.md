@@ -24,6 +24,9 @@ Claude Desktop doesn't draw custom status lines
 That's it. You need Claude Code 2.1.286 or later and a status line. No status line yet? Pick one
 from [statuslin.es](https://statuslin.es).
 
+To share these steps, send the
+[Claude Desktop status line guide](https://statuslin.es/guide/claude-desktop) on statuslin.es.
+
 <details>
 <summary>Install from inside Claude Code instead</summary>
 
