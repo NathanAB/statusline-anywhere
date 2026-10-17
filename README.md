@@ -74,6 +74,19 @@ It runs your status line command as you, which is what Claude Code does with it 
 Beyond that, it only reads your settings and session info, and draws. The plugin itself makes no
 network requests and writes no files.
 
+**The one program it runs.** It runs `sh -c "<command>"`, where `<command>` is the `statusLine`
+command from your Claude Code settings. That setting is a shell command string, so it needs a shell,
+the same way Claude Code runs it in a terminal. It runs when a session starts, after each reply, and
+every 60 seconds (or every `refreshInterval` seconds), and it stops the command after 10 seconds. It
+runs nothing else.
+
+**What it sends, and where.** The only thing it passes anywhere is the JSON object listed above,
+written to your status line command's stdin on your machine. It reads session facts to build that
+object (session id, folders, model, version, cost, token counts and limits) and never reads your
+messages. `transcript_path` is a file path, the same field Claude Code sends, so your own script can
+open the transcript if it chooses, as it can in a terminal. Anything your command does after that,
+such as fetching usage over the network, is up to your command.
+
 `claude plugin validate` lists its full footprint: `$.settings.read`, `$.session.*` reads,
 `$.env.get` for `HOME` and `CLAUDE_CONFIG_DIR`, `$.process.run`, `$.clock`, and drawing.
 
