@@ -11,6 +11,12 @@
   "repository": "https://github.com/NathanAB/statusline-anywhere",
   "documentationUrl": "https://github.com/NathanAB/statusline-anywhere#readme",
   "supportUrl": "https://github.com/NathanAB/statusline-anywhere/issues",
-  "keywords": ["status line", "statusline", "claude desktop", "mod"],
+  "privacyPolicyUrl": "https://github.com/NathanAB/statusline-anywhere#what-it-does-on-your-machine",
+  "keywords": [
+    "status line",
+    "statusline",
+    "claude desktop",
+    "mod"
+  ],
   "license": "MIT"
 }
